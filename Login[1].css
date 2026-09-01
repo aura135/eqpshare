@@ -1,0 +1,132 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f4f5f7;
+  display: flex;
+  justify-content: center;
+}
+
+.app {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  background: #fff;
+  position: relative;
+}
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, #1e5e35 0%, #2f9e44 60%, #37c94a 100%);
+  padding: 40px 24px 48px;
+  text-align: center;
+  position: relative;
+}
+
+.lang-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.lang-toggle:hover { background: rgba(255,255,255,0.35); }
+
+.icon {
+  font-size: 56px;
+  margin-bottom: 12px;
+}
+
+.header h1 {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.header p {
+  color: rgba(255,255,255,0.9);
+  font-size: 16px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  background: #eef0f2;
+  margin: 24px 20px 0;
+  border-radius: 14px;
+  padding: 6px;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 14px 0;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  color: #667085;
+  background: transparent;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.tab.active {
+  background: #fff;
+  color: #1e7a34;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* Form */
+.form {
+  padding: 28px 20px;
+}
+
+.field {
+  width: 100%;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  border: 1px solid #e2e5ea;
+  background: #f7f8fa;
+  border-radius: 12px;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+}
+
+.field::placeholder { color: #9aa0a6; }
+.field:focus { border-color: #2f9e44; background: #fff; }
+
+.submit-btn {
+  width: 100%;
+  padding: 17px 0;
+  background: #1e7a34;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.submit-btn:hover { background: #17612a; }
+
+.demo-text {
+  text-align: center;
+  color: #9aa0a6;
+  font-size: 13px;
+  margin-top: 18px;
+  line-height: 1.6;
+  padding: 0 10px;
+}
+
+.hidden { display: none; }

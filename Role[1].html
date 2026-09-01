@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EquipShare Hub - Choose Role</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f4f5f7;
+  display: flex;
+  justify-content: center;
+}
+
+.app {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  background: #fff;
+  position: relative;
+}
+
+.hidden { display: none; }
+
+/* ===================== Header ===================== */
+.header {
+  background: linear-gradient(135deg, #1e5e35 0%, #2f9e44 60%, #37c94a 100%);
+  padding: 40px 24px 48px;
+  text-align: center;
+  position: relative;
+}
+
+.lang-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.lang-toggle:hover { background: rgba(255,255,255,0.35); }
+
+.icon {
+  font-size: 56px;
+  margin-bottom: 12px;
+}
+
+.header h1 {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.header p {
+  color: rgba(255,255,255,0.9);
+  font-size: 16px;
+}
+
+/* ===================== Role Selection Body ===================== */
+.role-body {
+  padding: 28px 20px 40px;
+}
+
+.role-heading {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 800;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+}
+
+.role-subheading {
+  text-align: center;
+  color: #9aa0a6;
+  font-size: 15px;
+  margin-bottom: 24px;
+}
+
+.role-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  margin-bottom: 18px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.role-card:hover { transform: translateY(-2px); }
+
+.role-card.owner {
+  background: #eafbf0;
+  border-color: #b6ecc9;
+}
+
+.role-card.farmer {
+  background: #eaf4fd;
+  border-color: #bfe0fa;
+}
+
+.role-card.admin {
+  background: #f3eefc;
+  border-color: #ddccf7;
+}
+
+.role-icon {
+  font-size: 34px;
+  flex-shrink: 0;
+}
+
+.role-info { flex: 1; }
+
+.role-info h3 {
+  font-size: 19px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.role-card.owner .role-info h3 { color: #1e7a34; }
+.role-card.farmer .role-info h3 { color: #1c6fc9; }
+.role-card.admin .role-info h3 { color: #7a3fd1; }
+
+.role-info p {
+  font-size: 14px;
+  color: #5c6270;
+  line-height: 1.4;
+}
+
+.role-badge {
+  flex-shrink: 0;
+  background: #1e7a34;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.role-card.farmer .role-badge { background: #1c6fc9; }
+.role-card.admin .role-badge { background: #7a3fd1; }
+
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <div class="header">
+    <button class="lang-toggle" id="langToggle">తెలుగు</button>
+    <div class="icon">🌾</div>
+    <h1 id="titleText">EquipShare Hub</h1>
+    <p id="welcomeText">Welcome back! Ravi Kumar!</p>
+  </div>
+
+  <div class="role-body">
+    <h2 class="role-heading" id="roleHeading">Choose your role to continue</h2>
+    <p class="role-subheading" id="roleSubheading">You can switch between roles anytime</p>
+
+    <div class="role-card owner" id="ownerCard" onclick="selectRole('owner')">
+      <div class="role-icon">🔧</div>
+      <div class="role-info">
+        <h3>Equipment Owner</h3>
+        <p>List your equipment &amp; earn from rentals</p>
+      </div>
+      <span class="role-badge hidden" id="ownerBadge">YOUR ROLE</span>
+    </div>
+
+    <div class="role-card farmer" id="farmerCard" onclick="selectRole('farmer')">
+      <div class="role-icon">🌱</div>
+      <div class="role-info">
+        <h3>Farmer</h3>
+        <p>Find &amp; rent farm equipment near you</p>
+      </div>
+      <span class="role-badge hidden" id="farmerBadge">YOUR ROLE</span>
+    </div>
+
+    <div class="role-card admin" id="adminCard" onclick="selectRole('admin')">
+      <div class="role-icon">🛡️</div>
+      <div class="role-info">
+        <h3>Admin Dashboard</h3>
+        <p>Platform management &amp; analytics</p>
+      </div>
+      <span class="role-badge hidden" id="adminBadge">YOUR ROLE</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ===================== Text strings ===================== */
+const strings = {
+  en: {
+    title: "EquipShare Hub",
+    welcome: "Welcome back! Ravi Kumar!",
+    lang: "తెలుగు",
+    roleHeading: "Choose your role to continue",
+    roleSubheading: "You can switch between roles anytime"
+  },
+  te: {
+    title: "ఈక్విప్‌షేర్ హబ్",
+    welcome: "తిరిగి స్వాగతం! రవి కుమార్!",
+    lang: "English",
+    roleHeading: "కొనసాగించడానికి మీ పాత్రను ఎంచుకోండి",
+    roleSubheading: "మీరు ఎప్పుడైనా పాత్రల మధ్య మారవచ్చు"
+  }
+};
+
+let currentLang = 'en';
+
+/* ===================== Element refs ===================== */
+const langToggle = document.getElementById('langToggle');
+const titleText = document.getElementById('titleText');
+const welcomeText = document.getElementById('welcomeText');
+const roleHeading = document.getElementById('roleHeading');
+const roleSubheading = document.getElementById('roleSubheading');
+
+/* ===================== Language toggle ===================== */
+langToggle.addEventListener('click', () => {
+  currentLang = currentLang === 'en' ? 'te' : 'en';
+  updateText();
+});
+
+function updateText() {
+  const s = strings[currentLang];
+  titleText.textContent = s.title;
+  welcomeText.textContent = s.welcome;
+  langToggle.textContent = s.lang;
+  roleHeading.textContent = s.roleHeading;
+  roleSubheading.textContent = s.roleSubheading;
+}
+
+/* ===================== Role selection ===================== */
+function selectRole(role) {
+    if (role === 'owner') {
+        window.location.href = 'Profile.html';
+    }
+
+    if (role === 'admin') {
+        window.location.href = 'Admin.html';
+    }
+
+    if (role === 'farmer') {
+        window.location.href = 'Farmer.html';
+    }
+}
+</script>
+</body>
+</html>

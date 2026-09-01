@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EquipShare Hub - Farmer</title>
+  <link rel="stylesheet" href="../Css/Farmer.css">
+</head>
+
+<body>
+
+<div id="app">
+
+  <!-- ================= HEADER ================= -->
+  <header class="header">
+
+    <!-- Three-line menu -->
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu">
+      ☰
+    </button>
+
+    <div class="header-title">
+      <span class="logo">🌱</span>
+      <span data-i18n="appName">EquipShare Hub</span>
+    </div>
+
+    <div class="header-actions">
+
+      <!-- Notification -->
+      <button class="icon-btn notification-btn" id="notificationBtn">
+        🔔
+        <span id="notificationCount" class="notification-count">0</span>
+      </button>
+
+      <!-- Home -->
+      <button class="home-btn" id="homeBtn">
+        🏠 <span data-i18n="home">Home</span>
+      </button>
+
+    </div>
+  </header>
+
+
+  <!-- ================= SIDE MENU ================= -->
+  <aside class="side-menu" id="sideMenu">
+
+    <div class="side-menu-header">
+      <h3 data-i18n="menu">Menu</h3>
+      <button id="closeMenu" class="close-btn">×</button>
+    </div>
+
+    <!-- ONLY these items are inside the menu -->
+    <button class="menu-item" id="helpBtn">
+      ❓ <span data-i18n="help">Help</span>
+    </button>
+
+    <button class="menu-item" id="contactBtn">
+      📞 <span data-i18n="contactUs">Contact Us</span>
+    </button>
+
+    <button class="menu-item" id="adminBtn">
+      🛡️ <span data-i18n="adminDashboard">Admin Dashboard</span>
+    </button>
+
+    <button class="menu-item logout" id="logoutBtn">
+      🚪 <span data-i18n="signOut">Sign Out</span>
+    </button>
+
+  </aside>
+
+  <div class="overlay" id="overlay"></div>
+
+
+  <!-- ================= NOTIFICATION PANEL ================= -->
+  <div class="notification-panel" id="notificationPanel">
+
+    <div class="panel-header">
+      <h3 data-i18n="notifications">Notifications</h3>
+      <button id="closeNotifications" class="close-btn">×</button>
+    </div>
+
+    <div id="notificationList" class="notification-list"></div>
+
+  </div>
+
+
+  <!-- ================= MAIN ================= -->
+  <main class="main-container">
+
+    <!-- ================= PROFILE SCREEN ================= -->
+    <section id="profileScreen" class="screen">
+
+      <div class="profile-hero">
+
+        <button class="hero-home" id="profileHomeBtn">
+          🏠 <span data-i18n="home">Home</span>
+        </button>
+
+        <div class="plant-icon">🌱</div>
+
+        <h1 data-i18n="completeProfile">Complete Your Profile</h1>
+
+        <p data-i18n="profileSubtitle">
+          Fill in your details — admin will review & approve
+        </p>
+
+      </div>
+
+      <div class="form-card">
+
+        <div class="role-box">
+          <span class="role-icon">🌱</span>
+
+          <div>
+            <strong data-i18n="farmer">Farmer</strong>
+            <small data-i18n="requiredFields">
+              Fields marked * are required
+            </small>
+          </div>
+        </div>
+
+        <form id="farmerProfileForm">
+
+          <div class="form-group">
+            <label data-i18n="fullName">Full Name *</label>
+            <input
+              id="fullName"
+              type="text"
+              placeholder="Enter Full Name"
+              data-placeholder="fullNamePlaceholder"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label data-i18n="mobileNumber">Mobile Number *</label>
+            <input
+              id="mobile"
+              type="tel"
+              maxlength="10"
+              placeholder="Enter Mobile Number"
+              data-placeholder="mobilePlaceholder"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label data-i18n="aadhaarNumber">Aadhaar Number *</label>
+            <input
+              id="aadhaar"
+              type="text"
+              maxlength="12"
+              placeholder="Enter Aadhaar Number"
+              data-placeholder="aadhaarPlaceholder"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label data-i18n="village">Village / Town *</label>
+            <input
+              id="village"
+              type="text"
+              placeholder="Enter Village / Town"
+              data-placeholder="villagePlaceholder"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label data-i18n="district">District *</label>
+            <input
+              id="district"
+              type="text"
+              placeholder="Enter District"
+              data-placeholder="districtPlaceholder"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label data-i18n="state">State *</label>
+            <input
+              id="state"
+              type="text"
+              placeholder="Enter State"
+              data-placeholder="statePlaceholder"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label data-i18n="cropType">Crop Type</label>
+            <input
+              id="cropType"
+              type="text"
+              placeholder="Enter Crop Type"
+              data-placeholder="cropPlaceholder"
+            >
+          </div>
+
+          <div class="form-group">
+            <label data-i18n="landSize">Land Size (acres)</label>
+            <input
+              id="landSize"
+              type="number"
+              step="0.01"
+              placeholder="Enter Land Size"
+              data-placeholder="landSizePlaceholder"
+            >
+          </div>
+
+          <div class="form-group">
+            <label data-i18n="surveyNumber">Land Survey No.</label>
+            <input
+              id="surveyNo"
+              type="text"
+              placeholder="Enter Land Survey No."
+              data-placeholder="surveyPlaceholder"
+            >
+          </div>
+
+          <div class="form-group">
+            <label data-i18n="address">Address *</label>
+            <textarea
+              id="address"
+              placeholder="Enter Address"
+              data-placeholder="addressPlaceholder"
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="primary-btn">
+            <span data-i18n="submitApproval">
+              Submit for Admin Approval →
+            </span>
+          </button>
+
+        </form>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= WAITING SCREEN ================= -->
+    <section id="waitingScreen" class="screen hidden">
+
+      <div class="status-card waiting">
+
+        <div class="status-icon">⏳</div>
+
+        <h1 data-i18n="waitingTitle">
+          Waiting for Admin Approval
+        </h1>
+
+        <p data-i18n="waitingText">
+          Your profile has been submitted successfully.
+          Please wait while the Admin reviews your details.
+        </p>
+
+        <div class="status-label">
+          <span data-i18n="status">Status</span>:
+          <strong data-i18n="pending">Pending</strong>
+        </div>
+
+        <button class="secondary-btn" id="editProfileBtn">
+          ✏️ <span data-i18n="editProfile">Edit Profile</span>
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= REJECTED SCREEN ================= -->
+    <section id="rejectedScreen" class="screen hidden">
+
+      <div class="status-card rejected">
+
+        <div class="status-icon">❌</div>
+
+        <h1 data-i18n="rejectedTitle">
+          Admin Rejected Your Profile
+        </h1>
+
+        <p data-i18n="rejectedText">
+          Your profile was rejected by the Admin.
+          Please check your details, make the required changes,
+          and submit again.
+        </p>
+
+        <div class="rejection-message" id="rejectionReason">
+          Profile requires correction.
+        </div>
+
+        <button class="primary-btn" id="editRejectedProfileBtn">
+          ✏️ <span data-i18n="editAndResubmit">Edit & Resubmit</span>
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= MAIN DASHBOARD ================= -->
+    <section id="dashboardScreen" class="screen hidden">
+
+      <div class="dashboard-welcome">
+
+        <div>
+          <p class="small-text" data-i18n="welcome">Welcome</p>
+          <h1 id="farmerNameDisplay">Farmer</h1>
+        </div>
+
+        <div class="approved-badge">
+          ✓ <span data-i18n="approved">Approved</span>
+        </div>
+
+      </div>
+
+
+      <!-- Quick information -->
+      <div class="quick-grid">
+
+        <div class="quick-card">
+          <span>📋</span>
+          <strong id="requestCount">0</strong>
+          <small data-i18n="requests">Requests</small>
+        </div>
+
+        <div class="quick-card">
+          <span>🚜</span>
+          <strong id="activeBookingCount">0</strong>
+          <small data-i18n="activeBookings">Active Bookings</small>
+        </div>
+
+        <div class="quick-card">
+          <span>📦</span>
+          <strong id="pastBookingCount">0</strong>
+          <small data-i18n="pastBookings">Past Bookings</small>
+        </div>
+
+        <div class="quick-card">
+          <span>🔔</span>
+          <strong id="dashboardNotificationCount">0</strong>
+          <small data-i18n="notifications">Notifications</small>
+        </div>
+
+      </div>
+
+
+      <!-- ================= EQUIPMENT ================= -->
+      <section class="dashboard-section">
+
+        <div class="section-heading">
+
+          <div>
+            <p class="section-kicker" data-i18n="equipment">Equipment</p>
+            <h2 data-i18n="availableEquipment">
+              Available Equipment
+            </h2>
+          </div>
+
+        </div>
+
+        <div id="equipmentGrid" class="equipment-grid"></div>
+
+      </section>
+
+
+      <!-- ================= REQUESTS ================= -->
+      <section class="dashboard-section">
+
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker" data-i18n="requests">Requests</p>
+            <h2 data-i18n="myRequests">My Equipment Requests</h2>
+          </div>
+        </div>
+
+        <div id="requestsList" class="list-container"></div>
+
+      </section>
+
+
+      <!-- ================= BOOKINGS ================= -->
+      <section class="dashboard-section">
+
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker" data-i18n="bookings">Bookings</p>
+            <h2 data-i18n="currentBookings">Current Bookings</h2>
+          </div>
+        </div>
+
+        <div id="activeBookingsList" class="list-container"></div>
+
+      </section>
+
+
+      <section class="dashboard-section">
+
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker" data-i18n="pastBookings">Past Bookings</p>
+            <h2 data-i18n="completedBookings">
+              Completed Bookings
+            </h2>
+          </div>
+        </div>
+
+        <div id="pastBookingsList" class="list-container"></div>
+
+      </section>
+
+    </section>
+
+  </main>
+
+
+  <!-- ================= EQUIPMENT DETAILS MODAL ================= -->
+  <div class="modal" id="equipmentModal">
+
+    <div class="modal-content">
+
+      <button class="modal-close" id="closeEquipmentModal">×</button>
+
+      <img id="modalEquipmentImage" class="modal-equipment-image" src="" alt="Equipment">
+
+      <h2 id="modalEquipmentName"></h2>
+
+      <div class="owner-details">
+
+        <div>
+          <span data-i18n="ownerName">Owner Name</span>
+          <strong id="modalOwnerName"></strong>
+        </div>
+
+        <div>
+          <span data-i18n="mobile">Mobile</span>
+          <strong id="modalOwnerMobile"></strong>
+        </div>
+
+        <div>
+          <span data-i18n="ownerAddress">Address</span>
+          <strong id="modalOwnerAddress"></strong>
+        </div>
+
+        <div>
+          <span data-i18n="dailyPrice">Daily Price</span>
+          <strong id="modalDailyPrice"></strong>
+        </div>
+
+        <div>
+          <span data-i18n="advance">Advance</span>
+          <strong id="modalAdvance"></strong>
+        </div>
+
+      </div>
+
+      <button class="primary-btn" id="requestEquipmentBtn">
+        🚜 <span data-i18n="requestEquipment">Request Equipment</span>
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= CHAT MODAL ================= -->
+  <div class="modal" id="chatModal">
+
+    <div class="modal-content chat-content">
+
+      <button class="modal-close" id="closeChatModal">×</button>
+
+      <h2 id="chatOwnerName">Owner</h2>
+
+      <div id="chatMessages" class="chat-messages"></div>
+
+      <form id="chatForm" class="chat-form">
+
+        <input
+          id="chatInput"
+          type="text"
+          placeholder="Type your message..."
+          data-placeholder="messagePlaceholder"
+          required
+        >
+
+        <button type="submit">➤</button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= TOAST ================= -->
+  <div id="toast" class="toast"></div>
+
+</div>
+
+<script src="../Js/Farmer.js"></script>
+</body>
+</html>

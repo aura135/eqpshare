@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EquipShare Hub - Owner Dashboard</title>
+<link rel="stylesheet" href="../Css/Profile.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ===================== TOP HEADER (fixed) ===================== -->
+  <header class="top-header">
+    <div class="menu-wrap">
+      <button class="icon-btn" id="menuBtn">&#8942;</button>
+      <div class="dropdown-menu hidden" id="menuDropdown">
+        <button class="dropdown-item" id="signOutItem"><span class="dd-icon">🚪</span> <span data-i18n="menuSignOut">Sign Out</span></button>
+        <button class="dropdown-item" id="sendAdminRequestItem"><span class="dd-icon">📩</span> <span data-i18n="menuSendAdmin">Send Request to Admin</span></button>
+        <button class="dropdown-item" id="contactUsItem"><span class="dd-icon">📞</span> <span data-i18n="menuContact">Contact Us</span></button>
+        <a class="dropdown-item" href="tel:18001801551"><span class="dd-icon">🆘</span> <span data-i18n="menuHelpline">Helpline 1800-180-1551</span></a>
+        <a class="dropdown-item" href="Admin.html"><span class="dd-icon">🛡️</span> <span data-i18n="menuAdmin">Admin Dashboard</span></a>
+      </div>
+    </div>
+
+    <div class="brand">
+      <span class="brand-icon">🌾</span>
+      <span class="brand-name">EquipShare Hub</span>
+    </div>
+    <div class="header-right">
+      <button class="lang-pill" id="langToggle">తెలుగు</button>
+      <button class="icon-btn has-badge" id="messageBtn">
+        💬
+        <span class="header-badge hidden" id="messagesHeaderBadge"></span>
+      </button>
+      <button class="icon-btn" id="homeBtn">🏠
+  
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== MAIN CONTENT (changes per tab) ===================== -->
+  <main class="content">
+
+    <!-- My Listings -->
+    <section class="tab-panel active" id="panel-listings">
+      <div class="panel-header">
+        <h2 data-i18n="listingsTitle">My Listings</h2>
+        <button class="add-btn" id="addEquipmentBtn" data-i18n="addEquipmentBtn">+ Add Equipment</button>
+      </div>
+
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">📋</div>
+        <p data-i18n="listingsEmpty">No equipment listed yet. Add your first equipment above.</p>
+      </div>
+
+      <div class="listing-cards" id="listingCards"></div>
+    </section>
+
+    <!-- Requests -->
+    <section class="tab-panel" id="panel-requests">
+      <div class="panel-header">
+        <h2 data-i18n="requestsTitle">Requests</h2>
+        <button class="ghost-btn" id="simulateRequestBtn" data-i18n="simulateBtn">+ Simulate Farmer Request</button>
+      </div>
+
+      <div class="empty-state" id="requestsEmptyState">
+        <div class="empty-icon">📨</div>
+        <p data-i18n="requestsEmpty">No requests yet. Once your equipment is approved, farmer booking requests will appear here.</p>
+      </div>
+
+      <div class="request-cards" id="requestCards"></div>
+    </section>
+
+    <!-- Bookings -->
+    <section class="tab-panel" id="panel-bookings">
+      <div class="panel-header"><h2 data-i18n="bookingsTitle">Bookings</h2></div>
+      <div class="empty-state" id="bookingsEmptyState">
+        <div class="empty-icon">📅</div>
+        <p data-i18n="bookingsEmpty">No bookings yet. Accepted requests will show up here.</p>
+      </div>
+      <div class="booking-cards" id="bookingCards"></div>
+    </section>
+
+    <!-- Earnings -->
+    <section class="tab-panel" id="panel-earnings">
+      <div class="panel-header"><h2 data-i18n="earningsTitle">Earnings</h2></div>
+
+      <div class="earnings-summary">
+        <div class="summary-card">
+          <div class="amount" id="totalEarningsAmount">₹0</div>
+          <div class="caption" data-i18n="totalReceived">Total Received</div>
+        </div>
+        <div class="summary-card">
+          <div class="amount" id="totalCommissionAmount">₹0</div>
+          <div class="caption" data-i18n="adminCommission">Admin Commission</div>
+        </div>
+      </div>
+
+      <div class="empty-state" id="earningsEmptyState">
+        <div class="empty-icon">💰</div>
+        <p data-i18n="earningsEmpty">No earnings yet. Payments from farmers will appear here.</p>
+      </div>
+      <div id="earningsList"></div>
+    </section>
+
+    <!-- Profile -->
+    <section class="tab-panel" id="panel-profile">
+
+      <div class="profile-hero">
+        <div class="avatar-wrap">
+          <div class="avatar" id="avatar">🔧</div>
+          <div class="avatar-edit" id="avatarEdit" aria-label="Change photo">📷</div>
+          <input type="file" id="avatarInput" accept="image/*" class="hidden">
+        </div>
+        <h2 id="displayName" data-i18n="titleNew">Complete Your Profile</h2>
+        <div class="email">✉️ <span id="displayEmail">arjun@example.com</span></div>
+        <span class="role-pill" data-i18n="role">Equipment Owner</span>
+      </div>
+
+      <!-- Banner shown only for first-time / incomplete profile -->
+      <div class="setup-banner" id="setupBanner" data-i18n="banner">
+        👋 Welcome! Please fill in your details below to finish setting up your profile.
+      </div>
+
+      <div class="profile-card">
+        <div class="card-header">
+          <h3 id="cardTitle" data-i18n="titleNew">Complete Your Profile</h3>
+          <button class="edit-btn" id="editBtn" style="display:none;" data-i18n="edit">Edit Profile</button>
+        </div>
+
+        <div class="field-group">
+          <label for="fullName"><span data-i18n="fFullName">Full Name</span> <span class="req">*</span></label>
+          <input type="text" id="fullName" data-i18n-placeholder="phFullName" placeholder="Enter your full name">
+        </div>
+
+        <div class="field-group">
+          <label for="mobile"><span data-i18n="fMobile">Mobile Number</span> <span class="req">*</span></label>
+          <input type="tel" id="mobile" data-i18n-placeholder="phMobileProfile" placeholder="Enter your mobile number">
+        </div>
+
+        <div class="field-group">
+          <label for="address"><span data-i18n="fAddress">Address</span></label>
+          <input type="text" id="address" data-i18n-placeholder="phAddress" placeholder="House no, street, city, state">
+        </div>
+
+        <div class="field-group">
+          <label for="upi"><span data-i18n="fUpi">UPI ID</span></label>
+          <input type="text" id="upi" data-i18n-placeholder="phUpi" placeholder="yourname@upi">
+        </div>
+
+        <div class="field-group">
+          <label for="bank"><span data-i18n="fBank">Bank Account</span></label>
+          <input type="text" id="bank" data-i18n-placeholder="phBank" placeholder="Account number">
+        </div>
+
+        <div class="field-group">
+          <label for="ifsc"><span data-i18n="fIfsc">IFSC Code</span></label>
+          <input type="text" id="ifsc" data-i18n-placeholder="phIfsc" placeholder="e.g. SBIN0001234">
+        </div>
+
+        <!-- First-time fill: single Save Profile button -->
+        <button class="save-profile-btn" id="saveProfileBtn" data-i18n="saveProfile">Save Profile</button>
+
+        <!-- Returning user editing: Cancel / Save Changes row -->
+        <div class="save-row" id="saveRow">
+          <button class="cancel-btn" id="cancelBtn" data-i18n="cancel">Cancel</button>
+          <button class="save-btn" id="saveBtn" data-i18n="save">Save Changes</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== BOTTOM NAV (fixed) ===================== -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-tab="listings">
+      <span class="nav-icon">☰</span>
+      <span class="nav-label" data-i18n="navListings">My Listings</span>
+    </button>
+    <button class="nav-item" data-tab="requests">
+      <span class="nav-icon">➤</span>
+      <span class="nav-label" data-i18n="navRequests">Requests</span>
+      <span class="badge-dot hidden" id="requestsBadge">0</span>
+    </button>
+    <button class="nav-item" data-tab="bookings">
+      <span class="nav-icon">📅</span>
+      <span class="nav-label" data-i18n="navBookings">Bookings</span>
+    </button>
+    <button class="nav-item" data-tab="earnings">
+      <span class="nav-icon">$</span>
+      <span class="nav-label" data-i18n="navEarnings">Earnings</span>
+    </button>
+    <button class="nav-item" data-tab="profile">
+      <span class="nav-icon">👤</span>
+      <span class="nav-label" data-i18n="navProfile">Profile</span>
+    </button>
+  </nav>
+
+  <!-- ===================== ADD EQUIPMENT MODAL ===================== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h3 data-i18n="modalAddEquipment">Add Equipment</h3>
+        <button class="close-btn" id="closeModalBtn">✕</button>
+      </div>
+
+      <form id="equipmentForm" class="modal-form">
+
+        <p class="section-title" data-i18n="sectionOwnerDetails">Owner Details</p>
+
+        <label class="form-label" data-i18n="formName">Name</label>
+        <input type="text" id="ownerName" class="field" data-i18n-placeholder="phName" placeholder="Enter your full name" required>
+
+        <label class="form-label" data-i18n="formMobile">Mobile Number</label>
+        <input type="tel" id="ownerMobile" class="field" data-i18n-placeholder="phMobile" placeholder="10-digit mobile number" required pattern="[0-9]{10}">
+
+        <label class="form-label" data-i18n="formAddress">Address</label>
+        <textarea id="ownerAddress" class="field textarea" data-i18n-placeholder="phAddressForm" placeholder="House no, street, village/town"></textarea>
+
+        <button type="button" class="location-btn" id="useLocationBtn" data-i18n="useLocationBtn">📍 Use My Current Location</button>
+        <p class="location-status" id="locationStatus"></p>
+
+        <div class="field-row">
+          <div class="field-col">
+            <label class="form-label" data-i18n="formDistrict">District</label>
+            <input type="text" id="ownerDistrict" class="field" data-i18n-placeholder="phDistrict" placeholder="District">
+          </div>
+          <div class="field-col">
+            <label class="form-label" data-i18n="formState">State</label>
+            <input type="text" id="ownerState" class="field" data-i18n-placeholder="phState" placeholder="State">
+          </div>
+        </div>
+
+        <div class="divider"></div>
+        <p class="section-title" data-i18n="sectionEquipmentDetails">Equipment Details</p>
+
+        <label class="form-label" data-i18n="formEquipName">Equipment Name</label>
+        <input type="text" id="equipName" class="field" data-i18n-placeholder="phEquipName" placeholder="e.g. Tractor, Rotavator" required>
+
+        <label class="form-label" data-i18n="formRentPerDay">Rent Per Day (₹)</label>
+        <input type="number" id="rentPerDay" class="field" data-i18n-placeholder="phRentPerDay" placeholder="e.g. 200" required min="1">
+        <p class="rent-caption" id="rentCaption"></p>
+
+        <label class="form-label" data-i18n="formAdvanceAmount">Advance Amount (₹)</label>
+        <input type="number" id="advanceAmount" class="field" data-i18n-placeholder="phAdvanceAmount" placeholder="e.g. 500" min="0">
+
+        <label class="form-label" data-i18n="formVehicleNumber">Vehicle Number</label>
+        <input type="text" id="vehicleNumber" class="field" data-i18n-placeholder="phVehicleNumber" placeholder="e.g. AP07AB1234">
+
+        <label class="form-label" data-i18n="formLicenseNumber">License Number</label>
+        <input type="text" id="licenseNumber" class="field" data-i18n-placeholder="phLicenseNumber" placeholder="License number">
+
+        <label class="form-label" data-i18n="formRcNumber">RC Book Number</label>
+        <input type="text" id="rcNumber" class="field" data-i18n-placeholder="phRcNumber" placeholder="RC book number">
+
+        <div class="divider"></div>
+        <p class="section-title" data-i18n="sectionUploadDocs">Upload Documents</p>
+
+        <label class="form-label" data-i18n="labelLicensePhoto">License Photo</label>
+        <label class="upload-box" for="licensePhoto">
+          <input type="file" id="licensePhoto" accept="image/*" class="file-input">
+          <span class="upload-placeholder" id="licensePhotoText" data-i18n="uploadLicensePlaceholder">📷 Tap to upload license photo</span>
+          <img class="upload-preview hidden" id="licensePhotoPreview">
+        </label>
+
+        <label class="form-label" data-i18n="labelRcPhoto">RC Book Photo</label>
+        <label class="upload-box" for="rcPhoto">
+          <input type="file" id="rcPhoto" accept="image/*" class="file-input">
+          <span class="upload-placeholder" id="rcPhotoText" data-i18n="uploadRcPlaceholder">📷 Tap to upload RC book photo</span>
+          <img class="upload-preview hidden" id="rcPhotoPreview">
+        </label>
+
+        <label class="form-label" data-i18n="labelPlatePhoto">Number Plate Photo</label>
+        <label class="upload-box" for="platePhoto">
+          <input type="file" id="platePhoto" accept="image/*" class="file-input">
+          <span class="upload-placeholder" id="platePhotoText" data-i18n="uploadPlatePlaceholder">📷 Tap to upload number plate photo</span>
+          <img class="upload-preview hidden" id="platePhotoPreview">
+        </label>
+
+        <label class="form-label" data-i18n="labelEquipPhoto">Equipment Photo (with Owner)</label>
+        <label class="upload-box" for="equipPhoto">
+          <input type="file" id="equipPhoto" accept="image/*" class="file-input">
+          <span class="upload-placeholder" id="equipPhotoText" data-i18n="uploadEquipPlaceholder">📷 Tap to upload equipment photo</span>
+          <img class="upload-preview hidden" id="equipPhotoPreview">
+        </label>
+
+        <button type="submit" class="submit-request-btn" data-i18n="submitRequestBtn">Send Request to Admin</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================== MESSAGES / NOTIFICATIONS MODAL ===================== -->
+  <div class="modal-overlay" id="messagesOverlay">
+    <div class="modal-sheet messages-sheet">
+      <div class="modal-header">
+        <h3 data-i18n="messagesTitle">💬 Messages</h3>
+        <button class="close-btn" id="closeMessagesBtn">✕</button>
+      </div>
+
+      <div class="msg-tabs">
+        <button class="msg-tab active" data-msgtab="chats" data-i18n="tabMessages">💬 Messages</button>
+        <button class="msg-tab" data-msgtab="notifications" data-i18n="tabNotifications">🔔 Notifications</button>
+      </div>
+
+      <div class="msg-tab-panel active" id="msgPanel-chats">
+        <div class="empty-state" id="chatsEmptyState">
+          <div class="empty-icon">💬</div>
+          <p data-i18n="noConversations">No conversations yet.</p>
+          <p class="empty-sub" data-i18n="noConversationsSub">Chats open automatically when a booking is accepted.</p>
+        </div>
+        <div id="chatList"></div>
+      </div>
+
+      <div class="msg-tab-panel" id="msgPanel-notifications">
+        <div class="empty-state" id="notificationsEmptyState">
+          <div class="empty-icon">🔔</div>
+          <p data-i18n="noNotifications">No notifications yet.</p>
+        </div>
+        <div id="notificationsList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== CHAT THREAD ===================== -->
+  <div class="modal-overlay" id="chatThreadOverlay">
+    <div class="modal-sheet chat-sheet">
+      <div class="modal-header">
+        <button class="icon-btn" id="chatBackBtn">←</button>
+        <h3 id="chatThreadTitle">Farmer Name</h3>
+        <button class="close-btn" id="closeChatThreadBtn">✕</button>
+      </div>
+      <div class="chat-messages" id="chatMessages"></div>
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" data-i18n-placeholder="chatInputPh" placeholder="Type a message…">
+        <button id="chatSendBtn">➤</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== SIGNED-OUT SCREEN ===================== -->
+  <div class="signedout-screen hidden" id="signedOutScreen">
+    <div class="signedout-card">
+      <div class="signedout-icon">🚪</div>
+      <h2 data-i18n="signedOutTitle">Signed Out</h2>
+      <p data-i18n="signedOutMessage">You've been signed out. Your equipment listings are now hidden from farmers.</p>
+      <button class="signin-btn" id="signInBtn" data-i18n="signInBtn">Sign In</button>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div class="toast hidden" id="toast"></div>
+
+</div>
+
+<script src="../Js/Profile.js"></script>
+</body>
+</html>

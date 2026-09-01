@@ -1,0 +1,35 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EquipShare Hub</title>
+<link rel="stylesheet" href="Css/Login.css">
+</head>
+<body>
+
+<div class="app">
+  <div class="header">
+    <button class="lang-toggle" id="langToggle">తెలుగు</button>
+    <div class="icon">🌾</div>
+    <h1 id="titleText">EquipShare Hub</h1>
+    <p id="subtitleText">Connecting Farmers with Equipment Owners</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" id="signInTab" onclick="switchTab('signin')">Sign In</button>
+    <button class="tab" id="signUpTab" onclick="switchTab('signup')">Sign Up</button>
+  </div>
+
+  <form class="form" id="authForm">
+    <input type="email" class="field" id="emailField" placeholder="Email Address" required>
+    <input type="password" class="field" id="passwordField" placeholder="Password" required>
+    <input type="text" class="field hidden" id="nameField" placeholder="Full Name">
+    <input type="tel" class="field hidden" id="phoneField" placeholder="Phone Number">
+
+    <button type="submit" class="submit-btn" id="submitBtn">Sign In</button>
+  </form>
+</div>
+<script src="Js/Login.js"></script>
+</body>
+</html>

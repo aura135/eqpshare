@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EquipShare Hub - Admin Dashboard</title>
+<link rel="stylesheet" href="../Css/Admin.css">
+</head>
+<body>
+
+<!-- ============ SECRET CODE GATE ============ -->
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <div class="gate-icon">🔒</div>
+    <h2>Admin Access</h2>
+    <p>Enter the secret code to open the Admin Dashboard</p>
+    <input type="password" id="secretInput" placeholder="Enter secret code" autocomplete="off">
+    <div class="gate-error" id="gateError">Incorrect code. Please try again.</div>
+    <button id="verifyBtn">Verify</button>
+  </div>
+</div>
+
+<!-- ============ ADMIN DASHBOARD ============ -->
+<div class="app" id="dashboard" style="display:none;">
+
+  <!-- Header -->
+  <div class="dash-header">
+    <button class="back-btn" id="backBtn" aria-label="Back">←</button>
+    <div>
+      <h1>Admin Dashboard</h1>
+      <p>Profiles, transactions &amp; platform analytics</p>
+    </div>
+  </div>
+
+  <!-- Stat cards -->
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-text">
+        <span class="stat-label">Total Viewers</span>
+        <span class="stat-value" id="statViewers">0</span>
+      </div>
+      <div class="stat-icon icon-blue">👁️</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-text">
+        <span class="stat-label">Total Profiles</span>
+        <span class="stat-value" id="statProfiles">0</span>
+      </div>
+      <div class="stat-icon icon-green">👤</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-text">
+        <span class="stat-label">Total Bookings</span>
+        <span class="stat-value" id="statBookings">0</span>
+      </div>
+      <div class="stat-icon icon-orange">👥</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-text">
+        <span class="stat-label">Equipment Posted</span>
+        <span class="stat-value" id="statEquipment">0</span>
+      </div>
+      <div class="stat-icon icon-brown">📦</div>
+    </div>
+  </div>
+
+  <!-- Platform wallet -->
+  <div class="wallet-card">
+    <div class="stat-text">
+      <span class="stat-label">Platform Wallet</span>
+      <span class="stat-value wallet-value" id="statWallet">₹0</span>
+      <span class="wallet-sub">10% commission earned on completed bookings</span>
+    </div>
+    <div class="stat-icon icon-gold">💳</div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tab-bar">
+    <button class="tab active" data-tab="profiles">Profiles</button>
+    <button class="tab" data-tab="approvals">🔔 Approvals<span class="tab-badge" id="approvalsBadge" style="display:none;">0</span></button>
+    <button class="tab" data-tab="bookings">Bookings</button>
+    <button class="tab" data-tab="wallet">Wallet</button>
+    <button class="tab" data-tab="equipment">Equipment</button>
+  </div>
+
+  <!-- Tab panels -->
+  <div class="panel" id="panel-profiles">
+    <div class="panel-header">
+      <span class="panel-icon">👤</span>
+      <h3 id="profilesCount">All Profiles (0)</h3>
+    </div>
+    <p class="panel-hint">Tap any profile to view full details &amp; chats</p>
+    <div id="profileList"></div>
+  </div>
+
+  <div class="panel" id="panel-approvals" style="display:none;">
+    <div class="panel-header">
+      <span class="panel-icon">🔔</span>
+      <h3 id="approvalsCount">Pending Approvals (0)</h3>
+    </div>
+    <p class="panel-hint">Tap any request to review full details, then approve or reject</p>
+    <div id="approvalsList"></div>
+  </div>
+
+  <div class="panel" id="panel-bookings" style="display:none;">
+    <p class="placeholder-text">📅 Bookings — tell me what this tab needs to do and I'll build it.</p>
+  </div>
+
+  <div class="panel" id="panel-wallet" style="display:none;">
+    <div class="panel-header">
+      <span class="panel-icon">💳</span>
+      <h3>Earnings Breakdown</h3>
+    </div>
+    <p class="panel-hint">10% commission earned on every completed booking</p>
+    <div id="walletList"></div>
+  </div>
+
+  <div class="panel" id="panel-equipment" style="display:none;">
+    <div class="panel-header">
+      <span class="panel-icon">🚜</span>
+      <h3 id="equipmentCount">Approved Equipment (0)</h3>
+    </div>
+    <p class="panel-hint">Tap any equipment to see full details &amp; booking activity</p>
+    <div id="equipmentList"></div>
+  </div>
+
+</div>
+
+<!-- ============ DETAIL MODAL (profiles / approvals / equipment) ============ -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal-card">
+    <button class="modal-close" id="modalClose">×</button>
+    <div class="modal-avatar" id="modalAvatar"></div>
+    <h2 id="modalName"></h2>
+    <span class="modal-role" id="modalRole"></span>
+    <span class="modal-status" id="modalStatus"></span>
+
+    <div class="modal-fields" id="modalFields"></div>
+    <div class="modal-photos" id="modalPhotos" style="display:none;"></div>
+    <div class="modal-activity" id="modalActivity" style="display:none;"></div>
+
+    <div class="modal-actions" id="modalActions"></div>
+  </div>
+</div>
+
+<script src="../Js/Admin.js"></script>
+</body>
+</html>
